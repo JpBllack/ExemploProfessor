@@ -65,7 +65,7 @@ public class EstadoResource {
 
     @GET
     @Path("/search/{nome}")
-    public Estado search(@PathParam("nome") String nome){
+    public List<Estado> search(@PathParam("nome") String nome){
         return repository.findByNome(nome);
     }
 }
