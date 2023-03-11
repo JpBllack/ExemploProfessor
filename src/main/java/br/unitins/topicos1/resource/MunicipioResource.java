@@ -1,24 +1,23 @@
 package br.unitins.topicos1.resource;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.unitins.topicos1.dto.MunicipioDTO;
 import br.unitins.topicos1.dto.MunicipioResponseDTO;
-import br.unitins.topicos1.model.Municipio;
-import br.unitins.topicos1.repository.EstadoRepository;
-import br.unitins.topicos1.repository.MunicipioRepository;
+import br.unitins.topicos1.service.MunicipioService;
 
 @Path("/municipios")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -26,62 +25,51 @@ import br.unitins.topicos1.repository.MunicipioRepository;
 public class MunicipioResource {
     
     @Inject
-    private MunicipioRepository repository;
-
-    @Inject
-    private EstadoRepository estadoRepository;
+    MunicipioService municipioService;
 
     @GET
     public List<MunicipioResponseDTO> getAll() {
-        
-        // seleciona todas as Municipios do banco de dados
+        return municipioService.getAll();
+    }
 
-        return repository.findAll()
-            .stream()
-            .map(municipio -> new MunicipioResponseDTO(municipio))
-            .collect(Collectors.toList());
-            
-        // return repository.findAll().list();
-
+    @GET
+    @Path("/{id}")
+    public MunicipioResponseDTO findById(@PathParam("id") Long id) {
+        return municipioService.findById(id);
     }
 
     @POST
-    @Transactional
-    public MunicipioResponseDTO insert(MunicipioDTO dto) {
-
-        Municipio entity = new Municipio();
-        entity.setNome(dto.getNome());
-        entity.setEstado(estadoRepository.findById(dto.getIdEstado()));
-
-        repository.persist(entity);
-
-        return new MunicipioResponseDTO(entity);
+    public Response insert(MunicipioDTO dto) {
+        MunicipioResponseDTO municipio = municipioService.create(dto);
+        return Response.status(Status.CREATED).entity(municipio).build();
     }
 
     @PUT
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Municipio update(@PathParam("id") Long id, Municipio municipio) {
-
-         Municipio entity = repository.findById(id);
-
-         entity.setNome(municipio.getNome());
-
-        return entity;
+    public Response update(@PathParam("id") Long id, MunicipioDTO dto) {
+        MunicipioResponseDTO municipio = municipioService.update(id, dto);
+        return Response.ok(municipio).build();
     }
+
+    @PUT
+    @Path("/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        municipioService.delete(id);
+        return Response.status(Status.NO_CONTENT).build();
+    }
+
 
     @GET
     @Path("/count")
     public long count(){
-        return repository.count();
+        return municipioService.count();
     }
 
     @GET
     @Path("/search/{nome}")
-    public List<Municipio> search(@PathParam("nome") String nome){
-        return repository.findByNome(nome);
+    public List<MunicipioResponseDTO> search(@PathParam("nome") String nome){
+        return municipioService.findByNome(nome);
+        
     }
 }
 
