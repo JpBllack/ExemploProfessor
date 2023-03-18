@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import javax.validation.Validator;
 import javax.ws.rs.NotFoundException;
 
@@ -46,10 +47,8 @@ public class MunicipioServiceImpl implements MunicipioService {
 
     @Override
     @Transactional
-    public MunicipioResponseDTO create(MunicipioDTO municipioDTO) {
-        Set<ConstraintViolation<MunicipioDTO>> violations = validator.validate(municipioDTO);
-        if (!violations.isEmpty())
-            throw new ConstraintViolationException(violations);
+    public MunicipioResponseDTO create(MunicipioDTO municipioDTO) throws ConstraintViolationException {
+        validar(municipioDTO);
 
         Municipio entity = new Municipio();
         entity.setNome(municipioDTO.getNome());
@@ -61,13 +60,23 @@ public class MunicipioServiceImpl implements MunicipioService {
 
     @Override
     @Transactional
-    public MunicipioResponseDTO update(Long id, MunicipioDTO municipioDTO) {
+    public MunicipioResponseDTO update(Long id, MunicipioDTO municipioDTO) throws ConstraintViolationException{
+        validar(municipioDTO);
+   
         Municipio entity = municipioRepository.findById(id);
 
         entity.setNome(municipioDTO.getNome());
         entity.setEstado(estadoRepository.findById(municipioDTO.getIdEstado()));
 
         return new MunicipioResponseDTO(entity);
+    }
+
+    private void validar(MunicipioDTO municipioDTO) throws ConstraintViolationException {
+        Set<ConstraintViolation<MunicipioDTO>> violations = validator.validate(municipioDTO);
+        if (!violations.isEmpty())
+            throw new ConstraintViolationException(violations);
+
+
     }
 
     @Override
