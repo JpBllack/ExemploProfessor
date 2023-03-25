@@ -17,39 +17,6 @@ import br.unitins.topicos1.model.Pessoa;
 @Path("/pessoas")
 public class PessoaResource {
 
-    @GET
-    public List<Pessoa> getAll() {
-
-        // seleciona todas as pessoas do banco de dados
-        return Pessoa.findAll().list();
-
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Pessoa insert(Pessoa pessoa) {
-
-        // adiciona a pessoa no banco de dados
-        pessoa.persist();
-
-        return pessoa;
-    }
-
-    @PUT
-    @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Pessoa uptadte(@PathParam("id") Long id, Pessoa pessoa) {
-
-        Pessoa entity = Pessoa.findById(id);
-
-        entity.setCpf(pessoa.getCpf());
-        entity.setNome(pessoa.getNome());
-
-        return entity;
-    }
+    
     
 }
