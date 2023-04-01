@@ -9,6 +9,8 @@ public class PessoaFisicaDTO {
     @Size(max = 14, message = "O cpf deve posssuir no máximo 14 caracteres.")
     private String cpf;
 
+    private Integer sexo;
+
     @NotBlank(message = "O campo nome deve ser informado.")
     private String nome;
 
@@ -26,6 +28,14 @@ public class PessoaFisicaDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Integer getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Integer sexo) {
+        this.sexo = sexo;
     }
 
 }

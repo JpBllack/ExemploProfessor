@@ -3,7 +3,10 @@ package br.unitins.topicos1.dto;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import br.unitins.topicos1.model.PessoaFisica;
+import br.unitins.topicos1.model.Sexo;
 
 public class PessoaFisicaResponseDTO {
 
@@ -11,10 +14,14 @@ public class PessoaFisicaResponseDTO {
     private String cpf;
     private String nome;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Sexo sexo;
+
     public PessoaFisicaResponseDTO(PessoaFisica pessoaFisica) {
         this.id = pessoaFisica.getId();
         this.cpf = pessoaFisica.getCpf();
         this.nome = pessoaFisica.getNome();
+        this.sexo = pessoaFisica.getSexo();
     }
 
     public Long getId() {
@@ -40,5 +47,15 @@ public class PessoaFisicaResponseDTO {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    
 
 }

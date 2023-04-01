@@ -7,7 +7,7 @@
 insert into pessoa (nome) values('Marco');
 insert into pessoa (nome) values('Fredson');
 
-insert into pessoafisica(id, cpf) values (1, '111.111.111-11');
+insert into pessoafisica(id, cpf, sexo) values (1, '111.111.111-11', 1);
 insert into pessoafisica(id, cpf) values (2, '222.222.222-22');
 
 insert into estado (nome, sigla) values( 'Tocantins', 'TO');

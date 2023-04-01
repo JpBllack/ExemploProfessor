@@ -16,6 +16,7 @@ import javax.ws.rs.NotFoundException;
 import br.unitins.topicos1.dto.PessoaFisicaDTO;
 import br.unitins.topicos1.dto.PessoaFisicaResponseDTO;
 import br.unitins.topicos1.model.PessoaFisica;
+import br.unitins.topicos1.model.Sexo;
 import br.unitins.topicos1.repository.EstadoRepository;
 import br.unitins.topicos1.repository.PessoaFisicaRepository;
 
@@ -50,6 +51,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         PessoaFisica entity = new PessoaFisica();
         entity.setCpf(pessoaFisicaDTO.getCpf());
         entity.setNome(pessoaFisicaDTO.getNome());
+        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.getSexo()));
 
         pessoaFisicaRepository.persist(entity);
 
@@ -64,6 +66,7 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         PessoaFisica entity = pessoaFisicaRepository.findById(id);
         entity.setCpf(pessoaFisicaDTO.getCpf());
         entity.setNome(pessoaFisicaDTO.getNome());
+        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.getSexo()));
 
         return new PessoaFisicaResponseDTO(entity);
     }
