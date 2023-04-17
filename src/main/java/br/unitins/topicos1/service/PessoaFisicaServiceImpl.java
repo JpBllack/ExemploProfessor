@@ -49,9 +49,9 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         validar(pessoaFisicaDTO);
 
         PessoaFisica entity = new PessoaFisica();
-        entity.setCpf(pessoaFisicaDTO.getCpf());
-        entity.setNome(pessoaFisicaDTO.getNome());
-        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.getSexo()));
+        entity.setCpf(pessoaFisicaDTO.cpf());
+        entity.setNome(pessoaFisicaDTO.nome());
+        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.sexo()));
 
         pessoaFisicaRepository.persist(entity);
 
@@ -64,9 +64,9 @@ public class PessoaFisicaServiceImpl implements PessoaFisicaService {
         validar(pessoaFisicaDTO);
    
         PessoaFisica entity = pessoaFisicaRepository.findById(id);
-        entity.setCpf(pessoaFisicaDTO.getCpf());
-        entity.setNome(pessoaFisicaDTO.getNome());
-        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.getSexo()));
+        entity.setCpf(pessoaFisicaDTO.cpf());
+        entity.setNome(pessoaFisicaDTO.nome());
+        entity.setSexo(Sexo.valueOf(pessoaFisicaDTO.sexo()));
 
         return new PessoaFisicaResponseDTO(entity);
     }
