@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.oracle.svm.core.annotate.Delete;
 
 import br.unitins.topicos1.application.Result;
 import br.unitins.topicos1.dto.PessoaFisicaDTO;
@@ -56,15 +56,15 @@ public class PessoaFisicaResource {
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, PessoaFisicaDTO dto) {
         try {
-            PessoaFisicaResponseDTO pessoafisica = pessoaFisicaService.update(id, dto);
-            return Response.ok(pessoafisica).build();
+            pessoaFisicaService.update(id, dto);
+            return Response.status(Status.NO_CONTENT).build();
         } catch(ConstraintViolationException e) {
             Result result = new Result(e.getConstraintViolations());
             return Response.status(Status.NOT_FOUND).entity(result).build();
         }      
     }
 
-    @Delete
+    @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         pessoaFisicaService.delete(id);
