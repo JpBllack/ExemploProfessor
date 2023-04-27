@@ -1,16 +1,5 @@
 package br.unitins;
 
-import io.quarkus.test.common.http.TestHTTPEndpoint;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.http.ContentType;
-
-import org.junit.jupiter.api.Test;
-
-import br.unitins.topicos1.dto.PessoaFisicaDTO;
-import br.unitins.topicos1.dto.PessoaFisicaResponseDTO;
-import br.unitins.topicos1.resource.PessoaFisicaResource;
-import br.unitins.topicos1.service.PessoaFisicaService;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -18,6 +7,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import javax.inject.Inject;
+
+import org.junit.jupiter.api.Test;
+
+import br.unitins.topicos1.dto.PessoaFisicaDTO;
+import br.unitins.topicos1.dto.PessoaFisicaResponseDTO;
+import br.unitins.topicos1.resource.PessoaFisicaResource;
+import br.unitins.topicos1.service.PessoaFisicaService;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 
 @QuarkusTest
 public class PessoaFisicaResourceTest {
@@ -49,7 +48,8 @@ public class PessoaFisicaResourceTest {
              .statusCode(201)
              .body("id", notNullValue(),
               	 "nome", is("Elon Musk"),
-             	 "cpf", is("333.333.333-33"));
+             	 "cpf", is("333.333.333-33"),
+                 "sexo.label", is("Masculino"));
     }
 
     @Test
