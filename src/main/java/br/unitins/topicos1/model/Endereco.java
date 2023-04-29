@@ -1,6 +1,8 @@
 package br.unitins.topicos1.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Endereco extends DefaultEntity {
@@ -10,6 +12,10 @@ public class Endereco extends DefaultEntity {
     private String numero;
     private String complemento;
     private String cep;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     public boolean isPrincipal() {
         return principal;

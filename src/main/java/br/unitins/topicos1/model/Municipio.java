@@ -2,6 +2,7 @@ package br.unitins.topicos1.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -11,7 +12,7 @@ public class Municipio extends DefaultEntity {
     @Column(nullable = false, length = 60)
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estado")
     private Estado estado;
 

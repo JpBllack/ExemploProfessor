@@ -97,7 +97,7 @@
 
     Usuario "*" --> "*" Produto: listaDesejo
     Usuario "1" *--> "1" Telefone: celular
-    Usuario "1" *--> "1" Telefone: whatszap
+    Usuario "1" *--> "1" Telefone: whatsapp
     Usuario "1" *--> "*" Endereco
 
     Compra "1" *--> "*" ItemCompra
