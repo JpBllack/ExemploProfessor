@@ -29,10 +29,8 @@
 
     class Usuario {
         - id: Long
-        - nome: String 
-        - email: String
         - senha: String 
-        - cpf: String 
+        - login: String 
     }
 
     class Telefone {
@@ -74,10 +72,28 @@
         - sigla: String
     }
 
+    class Pessoa {
+        - nome: String
+    }
+
+    class PessoaFisica {
+        - cpf: String
+        - email: String
+        - sexo: Sexo
+    }
+
+    enum Sexo {
+        + MASCULINO: int
+        + FEMININO: int
+    }
+
     Faixa  -up-|> Produto
 
     Faixa "*" --> "1" Tamanho
     Faixa "*" --> "1" Esporte
+
+    PessoaFisica -up-|> Pessoa
+    Usuario "1" --> "1" PessoaFisica
 
     Usuario "*" --> "*" Produto: listaDesejo
     Usuario "1" *--> "1" Telefone: celular
@@ -93,6 +109,8 @@
     Endereco "*" --> "1" Municipio
     
     Municipio "*" --> "1" Estado
+
+    PessoaFisica "*" --> "1" Sexo
 
 
 @enduml
