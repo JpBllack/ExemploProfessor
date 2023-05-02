@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Usuario extends DefaultEntity {
 
-    private String login1;
+    private String login;
     private String senha;
 
     @OneToOne
@@ -36,12 +36,20 @@ public class Usuario extends DefaultEntity {
         this.senha = senha;
     }
 
-    public String getLogin1() {
-        return login1;
+    public String getLogin() {
+        return login;
     }
 
-    public void setLogin1(String login) {
-        this.login1 = login1;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public Telefone getCelular() {
+        return celular;
+    }
+
+    public void setCelular(Telefone celular) {
+        this.celular = celular;
     }
 
     public PessoaFisica getPessoaFisica() {

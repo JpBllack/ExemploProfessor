@@ -15,14 +15,17 @@ public record UsuarioResponseDTO(
     @JsonInclude(JsonInclude.Include.NON_NULL)
     Sexo sexo
 ) {
-    public UsuarioResponseDTO(Usuario u) {
-        this(u.getId(), 
-             u.getPessoaFisica().getCpf(), 
-             u.getPessoaFisica().getNome(),
-             u.getPessoaFisica().getEmail(),
-             u.getLogin1(), 
-             u.getPessoaFisica().getSexo()
-        ); 
+
+    public static UsuarioResponseDTO valueOf(Usuario u) {
+        if (u.getPessoaFisica() == null) 
+            return new UsuarioResponseDTO(u.getId(), null, null, null, u.getLogin(), null);
+        
+        return new UsuarioResponseDTO(u.getId(), 
+            u.getPessoaFisica().getCpf(), 
+            u.getPessoaFisica().getNome(),
+            u.getPessoaFisica().getEmail(),
+            u.getLogin(), 
+            u.getPessoaFisica().getSexo());
     }
 
 

@@ -23,4 +23,5 @@ insert into municipio (nome, id_estado) values( 'Paraiso do Tocantins', 1);
 --insert into usuario(login, senha, id_pessoa_fisica) values ("fred", "123", 2);
 
 
-insert into usuario(login1, senha) values ("marco", "123");
+insert into usuario (login, senha) values('marco', '123');
+insert into usuario (login, senha, id_pessoa_fisica) values('fredson', '123', 2);
