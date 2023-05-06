@@ -1,7 +1,7 @@
 package br.unitins.topicos1.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Estado extends DefaultEntity {

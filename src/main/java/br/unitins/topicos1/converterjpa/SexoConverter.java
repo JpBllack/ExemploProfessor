@@ -1,7 +1,7 @@
 package br.unitins.topicos1.converterjpa;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 import br.unitins.topicos1.model.Sexo;
 
