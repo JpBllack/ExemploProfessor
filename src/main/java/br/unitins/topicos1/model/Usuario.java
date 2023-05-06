@@ -1,7 +1,11 @@
 package br.unitins.topicos1.model;
 
 import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -12,6 +16,11 @@ public class Usuario extends DefaultEntity {
 
     private String login;
     private String senha;
+
+    @ElementCollection
+    @CollectionTable(name = "perfis", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
+    @Column(name = "perfil", length = 30)
+    private Set<Perfil> perfis;
 
     @OneToOne
     @JoinColumn(name = "id_telefone_celular", unique = true)
@@ -59,5 +68,31 @@ public class Usuario extends DefaultEntity {
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
     }
+
+    public Set<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(Set<Perfil> perfis) {
+        this.perfis = perfis;
+    }
+
+    public Telefone getWhastapp() {
+        return whastapp;
+    }
+
+    public void setWhastapp(Telefone whastapp) {
+        this.whastapp = whastapp;
+    }
+
+    public List<Endereco> getListaEndereco() {
+        return listaEndereco;
+    }
+
+    public void setListaEndereco(List<Endereco> listaEndereco) {
+        this.listaEndereco = listaEndereco;
+    }
+
+    
 
 }

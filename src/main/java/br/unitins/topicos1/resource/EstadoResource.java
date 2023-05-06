@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -26,6 +27,7 @@ public class EstadoResource {
     private EstadoRepository repository;
 
     @GET
+    @RolesAllowed({"Admin","User"})
     public List<Estado> getAll() {
         
         // seleciona todas as Estados do banco de dados
@@ -59,6 +61,7 @@ public class EstadoResource {
 
     @GET
     @Path("/count")
+    @RolesAllowed({"Admin"})
     public long count(){
         return repository.count();
     }

@@ -89,4 +89,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.count();
     }
 
+    @Override
+    public Usuario findByLoginAndSenha(String login, String senha) {
+        return usuarioRepository.findByLoginAndSenha(login, senha);
+    }
+
 }
