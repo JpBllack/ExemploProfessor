@@ -94,4 +94,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findByLoginAndSenha(login, senha);
     }
 
+    @Override
+    public UsuarioResponseDTO findByLogin(String login) {
+        Usuario usuario = usuarioRepository.findByLogin(login);
+        if (usuario == null)
+            throw new NotFoundException("Usuário não encontrado.");
+        return UsuarioResponseDTO.valueOf(usuario);
+    }
+
 }
