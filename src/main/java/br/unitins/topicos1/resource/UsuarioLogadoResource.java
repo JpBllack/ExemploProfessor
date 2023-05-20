@@ -77,8 +77,8 @@ public class UsuarioLogadoResource {
     @GET
     @Path("/download/{nomeImagem}")
     @RolesAllowed({"Admin","User"})
-    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    public Response salvarImagem(@PathParam("nomeImagem") String nomeImagem) {
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response download(@PathParam("nomeImagem") String nomeImagem) {
         ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
         response.header("Content-Disposition", "attachment;filename="+nomeImagem);
         return response.build();
