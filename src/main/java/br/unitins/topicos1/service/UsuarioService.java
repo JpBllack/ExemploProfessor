@@ -20,6 +20,8 @@ public interface UsuarioService {
 
    // UsuarioResponseDTO update(Long id, UsuarioDTO UsuarioDTO);
 
+    UsuarioResponseDTO update(Long id, String nomeImagem);
+
     void delete(Long id);
 
     // recursos extras

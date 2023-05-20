@@ -53,16 +53,5 @@ public class AuthResource {
         
     }
 
-    @GET
-    @Path("/usuario")
-    @RolesAllowed({"User"})
-    public Response getPerfilUsuario() {
-
-        // obtendo o login a partir do token
-        String login = jwt.getSubject();
-        UsuarioResponseDTO usuario = usuarioService.findByLogin(login);
-
-        return Response.ok(usuario).build();
-    }
     
 }

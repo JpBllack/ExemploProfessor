@@ -102,4 +102,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
+    @Override
+    @Transactional
+    public UsuarioResponseDTO update(Long id, String nomeImagem) {
+   
+        Usuario entity = usuarioRepository.findById(id);
+        entity.setNomeImagem(nomeImagem);
+
+        return UsuarioResponseDTO.valueOf(entity);
+    }
+
 }

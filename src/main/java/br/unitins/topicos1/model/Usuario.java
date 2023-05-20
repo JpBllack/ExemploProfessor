@@ -16,6 +16,7 @@ public class Usuario extends DefaultEntity {
 
     private String login;
     private String senha;
+    private String nomeImagem;
 
     @ElementCollection
     @CollectionTable(name = "perfis", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
@@ -93,6 +94,13 @@ public class Usuario extends DefaultEntity {
         this.listaEndereco = listaEndereco;
     }
 
-    
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+
 
 }
