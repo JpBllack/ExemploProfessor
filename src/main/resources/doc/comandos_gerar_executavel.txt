@@ -1,0 +1,7 @@
+Gerando um executavel
+
+./mvnw package -DskipTests
+
+Rodando o executavel
+
+java -jar quarkus-run.jar
